@@ -9,6 +9,9 @@ class Forme{
         this.color = color;
         this.wideness = wideness;
     }
+    setColor(color){
+        this.color = color;
+    }
 }
 
 class Rectangle extends Forme{
