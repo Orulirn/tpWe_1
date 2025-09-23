@@ -2,6 +2,15 @@ class Drawing{
     constructor() {
         this.formes = [];
     }
+
+    addForme(forme,ctx){
+        this.formes.push(forme);
+        this.paint(ctx)
+    }
+
+    getForms(){
+        return this.formes;
+    }
 }
 
 class Forme{

@@ -2,13 +2,14 @@
 // La création d'un Dnd requière un canvas et un interacteur.
 // L'interacteur viendra dans un second temps donc ne vous en souciez pas au départ.
 class DnD{
-    constructor(canvas){
+    constructor(canvas,interactor){
         this.x_init = 0;
         this.y_init = 0;
         this.x_final = 0;
         this.y_final = 0;
         this.canvas = canvas;
         this.isPressed = false;
+        this.interactor = interactor;
 
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
@@ -26,6 +27,7 @@ class DnD{
             this.y_final = mouseCoord.y;
             this.isPressed = false;
             console.log("mouseUp", mouseCoord);
+            this.interactor.onInteractionEnd(this);
         }
 
     }
@@ -36,6 +38,7 @@ class DnD{
         this.x_init = mouseCoord.x;
         this.y_init = mouseCoord.y;
         console.log("mouseDown", mouseCoord);
+        this.interactor.onInteractionStart(this);
     }
 
     onMouseMove(evt){
@@ -44,6 +47,7 @@ class DnD{
             this.x_final = mouseCoord.x;
             this.y_final = mouseCoord.y;
             console.log("mouseMove", mouseCoord);
+            this.interactor.onInteractionUpdate(this);
         }
     }
 }
