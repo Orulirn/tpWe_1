@@ -5,7 +5,7 @@ class Drawing{
 
     addForme(forme,ctx){
         this.formes.push(forme);
-        this.paint(ctx)
+        this.paint(ctx);
     }
 
     getForms(){
