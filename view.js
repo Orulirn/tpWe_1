@@ -25,3 +25,20 @@ Drawing.prototype.paint = function(ctx) {
         eltDuTableau.paint(ctx);
     });
 };
+
+Drawing.prototype.updateShapeList = function() {
+    var shapeList = document.getElementById("shapeList");
+    shapeList.innerHTML = "";
+
+    this.getForms().forEach(function(forme, index) {
+        var li = document.createElement("li");
+
+        if (forme instanceof Rectangle) {
+            li.textContent = "Rectangle(" + Math.round(forme.getInitX()) + ", " + Math.round(forme.getInitY()) + ", " + Math.round(forme.getFinalX()) + ", " + Math.round(forme.getFinalY()) + ")";
+        } else if (forme instanceof Line) {
+            li.textContent = "Line(" + Math.round(forme.getInitX()) + ", " + Math.round(forme.getInitY()) + ", " + Math.round(forme.getFinalX()) + ", " + Math.round(forme.getFinalY()) + ")";
+        }
+
+        shapeList.appendChild(li);
+    });
+};

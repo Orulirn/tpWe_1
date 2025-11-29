@@ -13,11 +13,11 @@ class Pencil{
         this.currentShape = 0;
         this.DnD = new DnD(canvas, this);
 
-        document.getElementById("butRect").addEventListener("input", (evt) => {
+        document.getElementById("butRect").addEventListener("change", (evt) => {
             this.currEditingMode = editingMode.rect;
         })
 
-        document.getElementById("butLine").addEventListener("input", (evt) =>{
+        document.getElementById("butLine").addEventListener("change", (evt) =>{
             this.currEditingMode = editingMode.line;
         })
 
@@ -57,8 +57,8 @@ class Pencil{
                 this.currentShape.point2 = [DnD.x_final, DnD.y_final];
                 break;
         }
-        this.drawing.paint(ctx)
-        this.currentShape.paint(ctx)
+        this.drawing.paint(this.ctx)
+        this.currentShape.paint(this.ctx)
 
     }
 
@@ -72,7 +72,8 @@ class Pencil{
                 this.currentShape.point2 = [DnD.x_final, DnD.y_final];
                 break;
         }
-        drawing.addForme(this.currentShape,this.ctx);
+        this.drawing.addForme(this.currentShape,this.ctx);
+        this.drawing.updateShapeList();
         this.currentShape=0;
     }
 }
