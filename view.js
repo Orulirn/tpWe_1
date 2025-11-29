@@ -33,12 +33,24 @@ Drawing.prototype.updateShapeList = function() {
     this.getForms().forEach(function(forme, index) {
         var li = document.createElement("li");
 
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn btn-default";
+
+        var span = document.createElement("span");
+        span.className = "glyphicon glyphicon-remove-sign";
+
+        button.appendChild(span);
+        li.appendChild(button);
+
+        var texte = "";
         if (forme instanceof Rectangle) {
-            li.textContent = "Rectangle(" + Math.round(forme.getInitX()) + ", " + Math.round(forme.getInitY()) + ", " + Math.round(forme.getFinalX()) + ", " + Math.round(forme.getFinalY()) + ")";
+            texte = "  Rectangle(" + Math.round(forme.getInitX()) + ", " + Math.round(forme.getInitY()) + ", " + Math.round(forme.getFinalX()) + ", " + Math.round(forme.getFinalY()) + ")";
         } else if (forme instanceof Line) {
-            li.textContent = "Line(" + Math.round(forme.getInitX()) + ", " + Math.round(forme.getInitY()) + ", " + Math.round(forme.getFinalX()) + ", " + Math.round(forme.getFinalY()) + ")";
+            texte = "  Line(" + Math.round(forme.getInitX()) + ", " + Math.round(forme.getInitY()) + ", " + Math.round(forme.getFinalX()) + ", " + Math.round(forme.getFinalY()) + ")";
         }
 
+        li.appendChild(document.createTextNode(texte));
         shapeList.appendChild(li);
     });
 };
