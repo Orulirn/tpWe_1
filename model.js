@@ -11,6 +11,10 @@ class Drawing{
     getForms(){
         return this.formes;
     }
+
+    removeForme(index){
+        this.formes.splice(index, 1);
+    }
 }
 
 class Forme{

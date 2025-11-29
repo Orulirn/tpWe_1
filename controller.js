@@ -73,7 +73,7 @@ class Pencil{
                 break;
         }
         this.drawing.addForme(this.currentShape,this.ctx);
-        this.drawing.updateShapeList();
+        this.drawing.updateShapeList(this.ctx);
         this.currentShape=0;
     }
 }

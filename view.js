@@ -26,9 +26,10 @@ Drawing.prototype.paint = function(ctx) {
     });
 };
 
-Drawing.prototype.updateShapeList = function() {
+Drawing.prototype.updateShapeList = function(ctx) {
     var shapeList = document.getElementById("shapeList");
     shapeList.innerHTML = "";
+    var self = this;
 
     this.getForms().forEach(function(forme, index) {
         var li = document.createElement("li");
@@ -39,6 +40,12 @@ Drawing.prototype.updateShapeList = function() {
 
         var span = document.createElement("span");
         span.className = "glyphicon glyphicon-remove-sign";
+
+        button.addEventListener("click", function() {
+            self.removeForme(index);
+            self.paint(ctx);
+            self.updateShapeList(ctx);
+        });
 
         button.appendChild(span);
         li.appendChild(button);
