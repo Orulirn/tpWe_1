@@ -1,5 +1,4 @@
-
-var editingMode = { rect: 0, line: 1 };
+var editingMode = { rect: 0, line: 1, circle: 2 };
 
 class Pencil{
 
@@ -7,7 +6,15 @@ class Pencil{
         this.ctx = ctx;
         this.drawing = drawing;
         this.canvas = canvas;
-        this.currEditingMode = editingMode.line;
+
+        if (document.getElementById("butRect").checked) {
+            this.currEditingMode = editingMode.rect;
+        } else if (document.getElementById("butCircle").checked) {
+            this.currEditingMode = editingMode.circle;
+        } else {
+            this.currEditingMode = editingMode.line;
+        }
+
         this.currLineWidth = document.getElementById("spinnerWidth").value;
         this.currColour = document.getElementById("colour").value;
         this.currentShape = 0;
@@ -19,6 +26,10 @@ class Pencil{
 
         document.getElementById("butLine").addEventListener("change", (evt) =>{
             this.currEditingMode = editingMode.line;
+        })
+
+        document.getElementById("butCircle").addEventListener("change", (evt) => {
+            this.currEditingMode = editingMode.circle;
         })
 
         document.getElementById("spinnerWidth").addEventListener("input", (evt) => {
@@ -44,6 +55,9 @@ class Pencil{
             case 1:
                 this.currentShape = new Line(DnD.x_init,DnD.y_init,DnD.x_init,DnD.y_init,this.currColour,this.currLineWidth);
                 break;
+            case 2:
+                this.currentShape = new Circle(DnD.x_init, DnD.y_init, 0, this.currColour, this.currLineWidth);
+                break;
         }
     }
 
@@ -55,6 +69,11 @@ class Pencil{
                 break;
             case 1:
                 this.currentShape.point2 = [DnD.x_final, DnD.y_final];
+                break;
+            case 2:
+                var dx = DnD.x_final - DnD.x_init;
+                var dy = DnD.y_final - DnD.y_init;
+                this.currentShape.radius = Math.sqrt(dx*dx + dy*dy);
                 break;
         }
         this.drawing.paint(this.ctx)
@@ -70,6 +89,11 @@ class Pencil{
                 break;
             case 1:
                 this.currentShape.point2 = [DnD.x_final, DnD.y_final];
+                break;
+            case 2:
+                var dx = DnD.x_final - DnD.x_init;
+                var dy = DnD.y_final - DnD.y_init;
+                this.currentShape.radius = Math.sqrt(dx*dx + dy*dy);
                 break;
         }
         this.drawing.addForme(this.currentShape,this.ctx);

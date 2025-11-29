@@ -70,6 +70,23 @@ class Line extends Forme{
     }
 }
 
+class Circle extends Forme{
+    constructor(centerX, centerY, radius, color, wideness) {
+        super(color, wideness);
+        this.center = [centerX, centerY];
+        this.radius = radius;
+    }
+
+    getInitX(){
+        return this.center[0];
+    }
+    getInitY(){
+        return this.center[1];
+    }
+    getRadius(){
+        return this.radius;
+    }
+}
 
 // Implémenter ici les 4 classes du modèle.
 // N'oubliez pas l'héritage !

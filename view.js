@@ -26,6 +26,14 @@ Drawing.prototype.paint = function(ctx) {
     });
 };
 
+Circle.prototype.paint = function(ctx) {
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = this.wideness;
+    ctx.beginPath();
+    ctx.arc(this.getInitX(), this.getInitY(), this.radius, 0, 2 * Math.PI);
+    ctx.stroke();
+};
+
 Drawing.prototype.updateShapeList = function(ctx) {
     var shapeList = document.getElementById("shapeList");
     shapeList.innerHTML = "";
@@ -55,6 +63,8 @@ Drawing.prototype.updateShapeList = function(ctx) {
             texte = "  Rectangle(" + Math.round(forme.getInitX()) + ", " + Math.round(forme.getInitY()) + ", " + Math.round(forme.getFinalX()) + ", " + Math.round(forme.getFinalY()) + ")";
         } else if (forme instanceof Line) {
             texte = "  Line(" + Math.round(forme.getInitX()) + ", " + Math.round(forme.getInitY()) + ", " + Math.round(forme.getFinalX()) + ", " + Math.round(forme.getFinalY()) + ")";
+        } else if (forme instanceof Circle) {
+            texte = "  Circle(" + Math.round(forme.getInitX()) + ", " + Math.round(forme.getInitY()) + ", " + Math.round(forme.getRadius()) + ")";
         }
 
         li.appendChild(document.createTextNode(texte));
